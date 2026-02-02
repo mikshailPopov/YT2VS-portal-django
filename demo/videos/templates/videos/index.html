@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Hello World!</h1>
+<p>Welcome to my first Django project!</p>
+
+{% if youtube_vid_list %}
+    <ul>
+    {% for video in youtube_vid_list %}
+        <li><a href="/history/videos/{{ video.id }}/">{{ video.url }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+</body>
+</html>

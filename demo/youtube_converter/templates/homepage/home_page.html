@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube Converter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header, footer{
+            background: #bf0b0b;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+        nav {
+            background: #000000;
+            padding: 0.5em;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .content {
+            width: 100%;
+            flex: 1;
+            padding: 5%;
+        }
+        #yt_converter_div{
+            position: relative;
+            top: 75px;
+            margin:0 auto;
+            margin-bottom: 50px;
+            width:100%;
+        }
+        #range-input-1{
+            height: 25px;
+            width: 45%
+        }
+        #range-input-2{
+            height: 25px;
+            width: 45%
+        }
+
+        #youtube_url{
+            width: 100%
+            position: relative;
+            left: 0%;
+        }
+        #url-input {
+            width: 100%;
+        }
+
+        .button_convert{
+            position: relative;
+            left: 0%;
+            top: 50px;
+            transition-duration: 0.4s;
+            background-color: white;
+            color: black;
+            border: 2px solid #fc2003; /* Green */
+            padding: 10px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+        .button_convert:hover{
+            background-color: #fc2003; /* Green */
+            color: white;
+        }
+
+        #convert_format_select {
+            position: relative;
+            top: 35px;
+        }
+        #playlist_range{
+            position: relative;
+            top: 25px;
+        }
+        #download-video-text{
+            font-weight: bold;
+            width:50%;
+            position: relative;
+<!--            top: 50%;-->
+<!--            left: 20%;-->
+        }
+
+
+
+        @media (min-width: 500px) {
+
+            #convert-form {
+                position: relative;
+                padding: 10px;
+                margin: auto;
+                width:60%;
+            }
+            #range-input-1{
+                height: 25px;
+                width: 23%
+            }
+            #range-input-2{
+                height: 25px;
+                width: 23%
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>YT2VS</h1>
+        </header>
+<!--        <nav>-->
+<!--&lt;!&ndash;            <a href="#">Home</a>&ndash;&gt;-->
+<!--&lt;!&ndash;            <a href="#">About</a>&ndash;&gt;-->
+<!--&lt;!&ndash;            <a href="#">Services</a>&ndash;&gt;-->
+<!--&lt;!&ndash;            <a href="#">Contact</a>&ndash;&gt;-->
+<!--        </nav>-->
+        <main class="content">
+<!--            <h2>Welcome to My Website</h2>-->
+<!--            <p>This is a simple webpage layout using HTML and CSS.</p>-->
+            <div id="yt_converter_div">
+                <form id="convert-form" action="{% url 'youtube_converter:download_video' %}" method="post" >
+                    {% csrf_token %}
+                    <div id="youtube_url">
+                        <br>
+                        <input id="url-input" style="height: 30px;" type="text" placeholder="Youtube URL Here..." name="youtube_url"
+                               required>
+                        <br><br>
+                        <h1 id="download-video-text">Options</h1>
+
+                        <div id="convert_format_select">
+                            <label style="font-weight: bold;">Convert format: </label>
+                            <select style="width:25%; height:35px;" name="formats" id="cars">
+                                {% for format_opt in format_options %}
+                                    <option value="{{ format_opt }}">{{ format_opt }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <br>
+
+                        <div id="playlist_range">
+                            <label style="font-weight: bold;">Start and end (only with playlists): </label>
+                            <input id="range-input-1" type="text" name="min_range" value="1">
+                            <input id="range-input-2" type="text" name="max_range" value="1">
+                            <br>
+                        </div>
+
+                        <br>
+                    </div>
+                    <button style="font-weight: bold;" class="button button_convert" id="convert-button" type="submit">Convert</button>
+                </form>
+            </div>
+        </main>
+
+        <footer>
+<!--            <p>&copy; 2025 My Website. All rights reserved.</p>-->
+        </footer>
+    </div>
+</body>
+</html>
